@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="signin.css" />
+  <link rel="icon" type="image/png" href="icone.png"> <!-- Substitua pelo caminho real do seu ícone -->
+  <style>
+    /* Importação de fontes do Google */
+    @import url('https://fonts.googleapis.com/css2?family=NovaFonte:wght@400&display=swap');
+
+    /* Estilo do cabeçalho "Entrar" */
+    .login-header {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #6eeaec !important; /* Corrigido para verde mais claro */
+      font-family: 'Robot', sans-serif; /* Substitua 'NovaFonte' pela fonte desejada */
+    }
+
+    /* Estilo específico para a palavra "Login" */
+    .login-header {
+      font-family: 'Robot', sans-serif; /* Substitua 'NovaFonte' pela fonte desejada */
+    }
+    
+    /* Estilo do corpo da página */
+    body {
+      background-color: black; /* Define a cor de fundo preta */
+      background-image: url("bg-signin.png");
+      background-repeat: no-repeat;
+      background-size: 800px 600px; /* Define a largura e altura específicas */
+      background-attachment: fixed;
+      background-position: center;
+      color: rgb(11, 10, 10);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Estilo do contêiner principal */
+    .container {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      margin-top: 20px;
+    }
+
+    /* Restante do seu estilo... */
+  </style>
+  <title>TARGET ZEUS</title>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1 class="login-header">Login</h1>
+
+      <div id="msgError"></div>
+
+      <div class="label-float">
+        <input type="text" id="usuario" placeholder="" required />
+        <label id="userLabel" for="usuario">E-mail</label>
+      </div>
+
+      <div class="label-float">
+        <input type="password" id="senha" placeholder="" required />
+        <label id="senhaLabel" for="senha">Senha</label>
+        <i class="fa fa-eye" aria-hidden="true"></i>
+      </div>
+
+      <div class="justify-center">
+        <button id="btnEntrar">Entrar</button>
+      </div>
+
+      <!-- Links de cadastro -->
+      <div class="justify-center">
+        <p>
+          Crie seu login |
+          <a href="https://wa.me/5521983755368?text=Ol%C3%A1%2C+tenho+uma+d%C3%BAvida..">
+            Cadastre-se
+          </a>
+      </div>
+
+      <!-- Imagem de suporte -->
+      <div class="support-button-container" style="position: relative; top: 66px; left: 130px;">
+        <a href="https://wa.me/5521983755368?text=Ol%C3%A1%2C+tenho+uma+d%C3%BAvida..">
+          <img src="suporte.png" alt="Suporte" style="width: 110px; height: 110px;">
+        </a>
+      </div>
+
+      <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+      <script>
+        const firebaseConfig = {
+          apiKey: "AIzaSyAW9xEcvycbr_AbnPdi87LsxdyjSnFOaQA",
+          authDomain: "target-zeus.firebaseapp.com",
+          projectId: "target-zeus",
+          storageBucket: "target-zeus.appspot.com",
+          messagingSenderId: "996320372836",
+          appId: "1:996320372836:web:2dd9d3bf5925772e5d9771"
+        };
+        firebase.initializeApp(firebaseConfig);
+      </script>
+
+      <script>
+        document.getElementById('btnEntrar').addEventListener('click', function () {
+          const usuario = document.getElementById('usuario').value.trim();
+          const senha = document.getElementById('senha').value.trim();
+
+          if (usuario.toLowerCase() === 'admin') {
+            // Redirecionar para o seu site desejado
+            window.location.href = 'https://console.firebase.google.com/u/1/project/target-zeus/authentication/users?hl=pt';
+          } else if ((usuario.toLowerCase() === 'infinity') || (senha.toLowerCase() === 'infinity')) {
+            // Redirecionar para a página "liberado.html"
+            window.location.href = 'liberado.html';
+          } else {
+            // Exibir mensagem de erro caso as credenciais sejam inválidas
+            document.getElementById('msgError').innerHTML = 'Credenciais inválidas. Tente novamente.';
+          }
+        });
+
+        // Adiciona um evento de escuta para a tecla Enter no campo de e-mail
+        document.getElementById('usuario').addEventListener('keypress', function (e) {
+          if (e.key === 'Enter') { // Verifica se a tecla pressionada é Enter
+            const usuario = document.getElementById('usuario').value.trim();
+            if (usuario.toLowerCase() === 'infinity') { // Verifica se o e-mail é "avalonday"
+              document.getElementById('senha').focus(); // Move o foco para o campo de senha
+            }
+          }
+        });
+
+        // Adiciona um evento de escuta para a tecla Enter no campo de senha
+        document.getElementById('senha').addEventListener('keypress', function (e) {
+          if (e.key === 'Enter') { // Verifica se a tecla pressionada é Enter
+            const senha = document.getElementById('senha').value.trim();
+            if (senha.toLowerCase() === 'infinity') { // Verifica se a senha é "avalonday"
+              document.getElementById('btnEntrar').click(); // Simula o clique no botão de entrar
+            }
+          }
+        });
+      </script>
+
+      <script src="signin.js"></script>
+      <script src="validations.js"></script>
+      <script src="loading.js"></script>
+  </div>
+</body>
+</html>
